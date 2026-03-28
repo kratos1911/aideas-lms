@@ -31,7 +31,6 @@ ALLOWED_HOSTS = ['*']
 
 # Allow all origins for the Vercel deployment
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
 
 
 # Application definition
