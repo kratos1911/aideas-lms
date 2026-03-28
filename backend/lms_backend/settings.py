@@ -27,16 +27,11 @@ SECRET_KEY = 'django-insecure-!s8t&7sr9ie(0yvh%z6=i%+9(q%ghif%q)%^tiaugy(+m!ewdk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = []
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+ALLOWED_HOSTS = ['*']
 
-# Add Vercel domain later, or allow all for immediate testing
+# Allow all origins for the Vercel deployment
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
+CORS_ALLOW_CREDENTIALS = True
 
 
 # Application definition
