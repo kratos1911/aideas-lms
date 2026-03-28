@@ -1,0 +1,25 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+db.sqlite3
+
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Env
+.env
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+
+# DB and Environment
+pgsql/
+.gemini/
