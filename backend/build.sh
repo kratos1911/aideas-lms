@@ -9,3 +9,8 @@ pip install -r requirements.txt
 
 python manage.py collectstatic --no-input
 python manage.py migrate
+
+if [[ -n "$DJANGO_SUPERUSER_USERNAME" && -n "$DJANGO_SUPERUSER_PASSWORD" && -n "$DJANGO_SUPERUSER_EMAIL" ]]; then
+    echo "Attempting to create superuser..."
+    python manage.py createsuperuser --noinput || echo "Superuser $DJANGO_SUPERUSER_USERNAME already exists."
+fi
