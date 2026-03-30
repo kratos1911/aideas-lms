@@ -34,6 +34,8 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "https://aideas-lms.vercel.app",
+    "https://aideas-lms-git-main-kratos1911s-projects.vercel.app",
+    "https://aideas-3ry3q4c9j-kratos1911s-projects.vercel.app",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:3000",
