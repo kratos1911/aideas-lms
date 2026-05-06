@@ -29,17 +29,46 @@ DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = ['*']
 
-# Allow origins for the Vercel deployment and local development
-CORS_ALLOW_ALL_ORIGINS = False
+# ─── CORS Configuration (bulletproof) ─────────────────────────────────
 CORS_ALLOW_CREDENTIALS = True
+
+# Exact origins we always trust
 CORS_ALLOWED_ORIGINS = [
     "https://aideas-lms.vercel.app",
-    "https://aideas-lms-git-main-kratos1911s-projects.vercel.app",
-    "https://aideas-3ry3q4c9j-kratos1911s-projects.vercel.app",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:3000",
 ]
+
+# Regex patterns to catch ALL Vercel preview/branch deploy URLs
+import re
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    re.compile(r"^https://aideas-lms.*\.vercel\.app$"),
+    re.compile(r"^https://.*kratos1911s-projects\.vercel\.app$"),
+]
+
+# Explicitly allow the headers and methods the frontend sends
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "authorization",
+    "content-type",
+    "origin",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+# Cache preflight responses for 1 hour – prevents repeated OPTIONS
+# requests that timeout while Render cold-starts
+CORS_PREFLIGHT_MAX_AGE = 3600
 
 
 # Application definition
