@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, User, Lock, ArrowRight, Loader2 } from 'lucide-react';
+import './Login.css';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -23,53 +24,112 @@ const Login = () => {
                 navigate('/');
             }
         } catch (err) {
-            setError('Invalid username or password');
+            setError('Invalid username or password. Please try again.');
         } finally {
             setIsLoading(false);
         }
     };
 
     return (
-        <div className="login-page">
-            <div className="login-left">
-                <div className="brand">
-                    <BookOpen size={40} />
-                    <h1>Elevate Your Learning</h1>
+        <div className="login-modern-container">
+            <div className="login-modern-left">
+                <div className="login-left-overlay"></div>
+                <div className="login-left-content">
+                    <div className="login-brand-logo">
+                        <BookOpen size={48} className="text-white" />
+                    </div>
+                    <h1 className="login-heading">Elevate Your<br/>Learning Journey</h1>
+                    <p className="login-description">
+                        Unlock a world of knowledge. Access your courses, track your progress, and achieve your goals with our modern learning platform.
+                    </p>
+                    <div className="login-glass-stats">
+                        <div className="glass-stat">
+                            <h3>100+</h3>
+                            <span>Courses</span>
+                        </div>
+                        <div className="glass-stat">
+                            <h3>50k+</h3>
+                            <span>Students</span>
+                        </div>
+                        <div className="glass-stat">
+                            <h3>4.9/5</h3>
+                            <span>Rating</span>
+                        </div>
+                    </div>
                 </div>
-                <p>Access your courses and track your progress in one place.</p>
             </div>
-            <div className="login-right">
-                <div className="login-card">
-                    <h2>Welcome Back</h2>
-                    <p className="login-subtitle">Please sign in to your account</p>
+            
+            <div className="login-modern-right">
+                <div className="login-modern-card">
+                    <div className="login-mobile-brand">
+                        <BookOpen size={32} className="text-primary" />
+                        <span>Aideas LMS</span>
+                    </div>
+                    
+                    <div className="login-header">
+                        <h2>Welcome Back ✨</h2>
+                        <p>Please enter your details to sign in.</p>
+                    </div>
 
-                    {error && <div className="error-message">{error}</div>}
+                    {error && (
+                        <div className="login-error-toast">
+                            <div className="error-icon">!</div>
+                            <span>{error}</span>
+                        </div>
+                    )}
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
+                    <form onSubmit={handleSubmit} className="login-modern-form">
+                        <div className="modern-form-group">
                             <label>Username</label>
-                            <input
-                                type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                placeholder="Enter your username"
-                                required
-                            />
+                            <div className="input-wrapper">
+                                <User size={20} className="input-icon" />
+                                <input
+                                    type="text"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    placeholder="Enter your username"
+                                    required
+                                    className={error ? 'input-error' : ''}
+                                />
+                            </div>
                         </div>
-                        <div className="form-group">
-                            <label>Password</label>
-                            <input
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Enter your password"
-                                required
-                            />
+                        
+                        <div className="modern-form-group">
+                            <div className="label-row">
+                                <label>Password</label>
+                                <a href="#" className="forgot-password">Forgot password?</a>
+                            </div>
+                            <div className="input-wrapper">
+                                <Lock size={20} className="input-icon" />
+                                <input
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="••••••••"
+                                    required
+                                    className={error ? 'input-error' : ''}
+                                />
+                            </div>
                         </div>
-                        <button type="submit" disabled={isLoading}>
-                            {isLoading ? 'Signing In...' : 'Sign In'}
+                        
+                        <button type="submit" className="login-modern-btn" disabled={isLoading}>
+                            {isLoading ? (
+                                <>
+                                    <Loader2 className="spinner" size={20} />
+                                    <span>Signing in...</span>
+                                </>
+                            ) : (
+                                <>
+                                    <span>Sign In</span>
+                                    <ArrowRight size={20} className="btn-icon" />
+                                </>
+                            )}
                         </button>
                     </form>
+                    
+                    <div className="login-footer">
+                        <p>Don't have an account? <a href="#">Contact admin</a></p>
+                    </div>
                 </div>
             </div>
         </div>
